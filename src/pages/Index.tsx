@@ -35,14 +35,14 @@ const useNavScroll = () => {
         setLight(false);
         if (logoRadius) logoRadius.style.color = "#000";
         if (logoDev) logoDev.style.color = "#888";
-        navLinks.forEach((l) => ((l as HTMLElement).style.color = "#000"));
+        navLinks.forEach((l) => (l as HTMLElement).style.color = "#000");
         if (navCta) navCta.style.background = "var(--grad)";
       } else {
         setScrolled(false);
         setLight(true);
         if (logoRadius) logoRadius.style.color = "#fff";
         if (logoDev) logoDev.style.color = "rgba(255,255,255,0.4)";
-        navLinks.forEach((l) => ((l as HTMLElement).style.color = "#fff"));
+        navLinks.forEach((l) => (l as HTMLElement).style.color = "#fff");
       }
     };
     // Initial state
@@ -77,15 +77,15 @@ const Index = () => {
             <span
               className="syne nav-logo-text"
               style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.02em", color: "#fff", transition: "color 0.4s" }}
-              id="logo-radius"
-            >
+              id="logo-radius">
+              
               RADIUS
             </span>
             <span
               className="mono nav-logo-text"
               style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.5)", transition: "color 0.4s", textTransform: "uppercase" }}
-              id="logo-dev"
-            >
+              id="logo-dev">
+              
               Development Group
             </span>
           </div>
@@ -102,8 +102,8 @@ const Index = () => {
           href="#investors"
           className="btn-primary"
           style={{ fontSize: 10, padding: "14px 28px", textDecoration: "none" }}
-          id="nav-cta"
-        >
+          id="nav-cta">
+          
           Investor Portal
         </a>
       </nav>
@@ -118,13 +118,13 @@ const Index = () => {
           <div className="hero-label reveal">Raleigh-Durham · Research Triangle · NC</div>
           <h1 className="hero-headline">
             <div className="reveal">
-              <span style={{ color: "#fff" }}>BUILDING</span>
+              <span style={{ color: "#fff" }} className="text-5xl py-0 my-0 mx-0">BUILDING</span>
             </div>
             <div className="reveal reveal-delay-1">
-              <span className="gradient-text">BEYOND</span>
+              <span className="gradient-text text-7xl">BEYOND</span>
             </div>
             <div className="reveal reveal-delay-2">
-              <span style={{ color: "#fff" }}>LIMITS.</span>
+              <span style={{ color: "#fff" }} className="text-6xl">LIMITS.</span>
             </div>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
@@ -326,32 +326,32 @@ const Index = () => {
         </h2>
         <div className="services-grid">
           {[
-            {
-              num: "01",
-              title: "Site Sourcing & Acquisition",
-              desc: "We identify high-potential land and assets through proprietary data analysis, local market intelligence, and a deep network of off-market relationships across the Research Triangle.",
-              items: ["Off-market deal sourcing", "Feasibility & zoning analysis", "Acquisition financing", "Environmental due diligence"],
-            },
-            {
-              num: "02",
-              title: "Entitlement & Planning",
-              desc: "Navigating the regulatory landscape requires expertise. We manage municipal relationships, architect selection, and entitlement processes to unlock maximum value from every site.",
-              items: ["Rezoning & variance management", "Architect & engineer selection", "Community engagement", "Permitting & approvals"],
-            },
-            {
-              num: "03",
-              title: "Construction & Development",
-              desc: "From groundbreaking to ribbon-cutting, we manage all phases of construction with trusted general contractors, rigorous cost controls, and an uncompromising commitment to quality.",
-              items: ["GC selection & oversight", "Value engineering", "Budget & schedule management", "Quality control protocols"],
-            },
-            {
-              num: "04",
-              title: "Capital & Exit Strategy",
-              desc: "We structure capital stacks to maximize investor returns and manage dispositions with precision — whether through portfolio sale, recapitalization, or long-term asset management.",
-              items: ["Equity & debt structuring", "Investor reporting", "Asset stabilization", "Disposition & refinancing"],
-            },
-          ].map((s, i) => (
-            <div className={`service-item reveal ${i % 2 === 1 ? "reveal-delay-1" : ""}`} key={i}>
+          {
+            num: "01",
+            title: "Site Sourcing & Acquisition",
+            desc: "We identify high-potential land and assets through proprietary data analysis, local market intelligence, and a deep network of off-market relationships across the Research Triangle.",
+            items: ["Off-market deal sourcing", "Feasibility & zoning analysis", "Acquisition financing", "Environmental due diligence"]
+          },
+          {
+            num: "02",
+            title: "Entitlement & Planning",
+            desc: "Navigating the regulatory landscape requires expertise. We manage municipal relationships, architect selection, and entitlement processes to unlock maximum value from every site.",
+            items: ["Rezoning & variance management", "Architect & engineer selection", "Community engagement", "Permitting & approvals"]
+          },
+          {
+            num: "03",
+            title: "Construction & Development",
+            desc: "From groundbreaking to ribbon-cutting, we manage all phases of construction with trusted general contractors, rigorous cost controls, and an uncompromising commitment to quality.",
+            items: ["GC selection & oversight", "Value engineering", "Budget & schedule management", "Quality control protocols"]
+          },
+          {
+            num: "04",
+            title: "Capital & Exit Strategy",
+            desc: "We structure capital stacks to maximize investor returns and manage dispositions with precision — whether through portfolio sale, recapitalization, or long-term asset management.",
+            items: ["Equity & debt structuring", "Investor reporting", "Asset stabilization", "Disposition & refinancing"]
+          }].
+          map((s, i) =>
+          <div className={`service-item reveal ${i % 2 === 1 ? "reveal-delay-1" : ""}`} key={i}>
               <div className="service-num gradient-text">{s.num}</div>
               <div className="service-body">
                 <div className="service-title">{s.title}</div>
@@ -361,7 +361,7 @@ const Index = () => {
                 </ul>
               </div>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
@@ -396,12 +396,12 @@ const Index = () => {
             </p>
             <ul className="portal-features">
               {["Live project tracking & dashboards", "Quarterly financial reporting", "Distribution history & projections", "Deal pipeline & co-invest access", "Document vault & tax documents"].map(
-                (f, i) => (
-                  <li key={i}>
+                (f, i) =>
+                <li key={i}>
                     <span className="portal-dot" />
                     {f}
                   </li>
-                )
+
               )}
             </ul>
             <a href="#contact" className="btn-portal">
@@ -430,24 +430,24 @@ const Index = () => {
         </p>
         <div className="team-grid">
           {[
-            { initials: "JR", name: "James Rafferty", role: "Founder & CEO", bg: "linear-gradient(135deg, #1a1a2e, #0f3460)" },
-            { initials: "MC", name: "Morgan Chen", role: "Chief Investment Officer", bg: "linear-gradient(135deg, #1e293b, #0f172a)" },
-            { initials: "DP", name: "David Park", role: "VP of Development", bg: "linear-gradient(135deg, #1c2333, #161b22)" },
-            { initials: "SE", name: "Sarah Elliott", role: "Director of Capital Markets", bg: "linear-gradient(135deg, #0c1624, #0f2137)" },
-          ].map((t, i) => (
-            <div className={`team-card reveal ${i > 0 ? `reveal-delay-${i}` : ""}`} key={i}>
+          { initials: "JR", name: "James Rafferty", role: "Founder & CEO", bg: "linear-gradient(135deg, #1a1a2e, #0f3460)" },
+          { initials: "MC", name: "Morgan Chen", role: "Chief Investment Officer", bg: "linear-gradient(135deg, #1e293b, #0f172a)" },
+          { initials: "DP", name: "David Park", role: "VP of Development", bg: "linear-gradient(135deg, #1c2333, #161b22)" },
+          { initials: "SE", name: "Sarah Elliott", role: "Director of Capital Markets", bg: "linear-gradient(135deg, #0c1624, #0f2137)" }].
+          map((t, i) =>
+          <div className={`team-card reveal ${i > 0 ? `reveal-delay-${i}` : ""}`} key={i}>
               <div className="team-photo">
                 <div className="team-photo-inner">
                   <div className="team-photo-placeholder">
                     <div className="team-initials" style={{
-                      background: t.bg,
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: i === 0 ? "rgba(56,189,248,0.4)" : i === 1 ? "rgba(29,78,216,0.4)" : i === 2 ? "rgba(14,165,233,0.35)" : "rgba(56,189,248,0.3)"
-                    }}>
+                    background: t.bg,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: i === 0 ? "rgba(56,189,248,0.4)" : i === 1 ? "rgba(29,78,216,0.4)" : i === 2 ? "rgba(14,165,233,0.35)" : "rgba(56,189,248,0.3)"
+                  }}>
                       <span className="team-initials">{t.initials}</span>
                     </div>
                   </div>
@@ -457,7 +457,7 @@ const Index = () => {
               <div className="team-name">{t.name}</div>
               <div className="team-title-role">{t.role}</div>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
@@ -577,8 +577,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </>
-  );
+    </>);
+
 };
 
 export default Index;
