@@ -13,7 +13,7 @@
 html { scroll-behavior: smooth; }
 html, body {
   font-family: 'DM Sans', sans-serif !important;
-  background: #fff;
+  background: #000 !important;
   color: #000;
   overflow-x: hidden;
   margin: 0 !important;
