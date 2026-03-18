@@ -243,7 +243,7 @@ const Index = () => {
           <div className="project-card reveal reveal-delay-1">
             <div className="project-card-placeholder ph-2" style={{ minHeight: 580 }}>
               <div className="arch-lines" />
-              <div style={{ position: "absolute", bottom: "30%", left: "50%", transform: "translateX(-50%)", width: 80, height: 80, border: "1px solid rgba(56,189,248,0.25)", borderRadius: "50%", transform: "translateX(-50%) rotate(45deg)" }} />
+              <div style={{ position: "absolute", bottom: "30%", left: "50%", transform: "translateX(-50%) rotate(45deg)", width: 80, height: 80, border: "1px solid rgba(56,189,248,0.25)", borderRadius: "50%" }} />
               <div className="arch-accent" />
             </div>
             <div className="project-overlay">
