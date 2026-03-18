@@ -1,152 +1,363 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useNavScroll } from "@/hooks/useNavScroll";
+import { useEffect, useState, useCallback } from "react";
 
-const ArrowRight = () => (
-  <span className="arrow-right" />
-);
+const useScrollReveal = () => {
+  useEffect(() => {
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    reveals.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+};
+
+const useNavScroll = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [light, setLight] = useState(true);
+
+  useEffect(() => {
+    const navbar = document.getElementById("navbar");
+    const logoRadius = document.getElementById("logo-radius");
+    const logoDev = document.getElementById("logo-dev");
+    const navLinks = document.querySelectorAll(".nav-link-item");
+    const navCta = document.getElementById("nav-cta");
+
+    const handleScroll = () => {
+      if (window.scrollY > 80) {
+        setScrolled(true);
+        setLight(false);
+        if (logoRadius) logoRadius.style.color = "#000";
+        if (logoDev) logoDev.style.color = "#888";
+        navLinks.forEach((l) => ((l as HTMLElement).style.color = "#000"));
+        if (navCta) navCta.style.background = "var(--grad)";
+      } else {
+        setScrolled(false);
+        setLight(true);
+        if (logoRadius) logoRadius.style.color = "#fff";
+        if (logoDev) logoDev.style.color = "rgba(255,255,255,0.4)";
+        navLinks.forEach((l) => ((l as HTMLElement).style.color = "#fff"));
+      }
+    };
+    // Initial state
+    if (navbar) navbar.classList.add("light");
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return { scrolled, light };
+};
+
+const ArrowRight = () => <span className="arrow-right" />;
 
 const Index = () => {
   useScrollReveal();
   const { scrolled, light } = useNavScroll();
 
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    const btn = (e.target as HTMLFormElement).querySelector(".btn-submit");
+    if (btn) btn.innerHTML = "✓ Inquiry Received";
+  }, []);
+
   return (
     <>
-      {/* NAV */}
-      <nav className={`site-nav ${scrolled ? "scrolled" : ""} ${light && !scrolled ? "light" : ""}`}>
+      {/* NAVIGATION */}
+      <nav id="navbar" className={`site-nav ${scrolled ? "scrolled" : ""} ${light && !scrolled ? "light" : ""}`}>
         <a href="#hero" className="nav-logo">
           <div className="nav-logo-icon"><div className="nav-logo-inner" /></div>
-          <span className="nav-logo-text syne" style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.02em" }}>
-            Radius
-          </span>
+          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
+            <span
+              className="syne nav-logo-text"
+              style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.02em", color: "#fff", transition: "color 0.4s" }}
+              id="logo-radius"
+            >
+              RADIUS
+            </span>
+            <span
+              className="mono nav-logo-text"
+              style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.5)", transition: "color 0.4s", textTransform: "uppercase" }}
+              id="logo-dev"
+            >
+              Development Group
+            </span>
+          </div>
         </a>
-        <ul className="nav-links">
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#investors">Investors</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul className="nav-links" id="nav-links">
+          <li><a href="#about" style={{ color: "#fff" }} className="nav-link-item">About</a></li>
+          <li><a href="#portfolio" style={{ color: "#fff" }} className="nav-link-item">Projects</a></li>
+          <li><a href="#services" style={{ color: "#fff" }} className="nav-link-item">Services</a></li>
+          <li><a href="#investors" style={{ color: "#fff" }} className="nav-link-item">Investors</a></li>
+          <li><a href="#team" style={{ color: "#fff" }} className="nav-link-item">Team</a></li>
+          <li><a href="#contact" style={{ color: "#fff" }} className="nav-link-item">Contact</a></li>
         </ul>
+        <a
+          href="#investors"
+          className="btn-primary"
+          style={{ fontSize: 10, padding: "14px 28px", textDecoration: "none" }}
+          id="nav-cta"
+        >
+          Investor Portal
+        </a>
       </nav>
 
       {/* HERO */}
       <section id="hero">
         <div className="hero-bg" />
         <div className="hero-grid-lines" />
-        <div className="hero-circle" style={{ width: 600, height: 600, top: "-10%", right: "-5%" }} />
-        <div className="hero-circle" style={{ width: 300, height: 300, bottom: "10%", left: "30%" }} />
+        <div className="hero-circle" style={{ width: 600, height: 600, top: "50%", right: -200, transform: "translateY(-50%)" }} />
+        <div className="hero-circle" style={{ width: 400, height: 400, top: "50%", right: -100, transform: "translateY(-50%)", borderColor: "rgba(56,189,248,0.08)" }} />
         <div className="hero-content">
-          <div className="hero-label reveal">Development &amp; Investment</div>
-          <h1 className="hero-headline reveal reveal-delay-1">
-            Building<br />
-            <span className="gradient-text">Tomorrow's</span><br />
-            Landmarks
+          <div className="hero-label reveal">Raleigh-Durham · Research Triangle · NC</div>
+          <h1 className="hero-headline">
+            <div className="reveal">
+              <span style={{ color: "#fff" }}>BUILDING</span>
+            </div>
+            <div className="reveal reveal-delay-1">
+              <span className="gradient-text">BEYOND</span>
+            </div>
+            <div className="reveal reveal-delay-2">
+              <span style={{ color: "#fff" }}>LIMITS.</span>
+            </div>
           </h1>
-          <p className="hero-sub reveal reveal-delay-2">
-            Premium real estate development across commercial, residential, and mixed-use sectors — 
-            creating value through visionary design and strategic execution.
+          <p className="hero-sub reveal reveal-delay-3">
+            Full-cycle real estate development across the Research Triangle — from site acquisition to strategic exit.
           </p>
-          <a href="#portfolio" className="btn-primary reveal reveal-delay-3">
-            View Portfolio <ArrowRight />
-          </a>
+          <div className="reveal reveal-delay-4" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <a href="#portfolio" className="btn-primary">
+              View Projects <span className="arrow-right" style={{ background: "#fff" }} />
+            </a>
+            <a href="#investors" className="btn-secondary" style={{ color: "#fff", borderColor: "rgba(255,255,255,0.3)" }}>
+              Investor Access
+            </a>
+          </div>
         </div>
         <div className="hero-scroll">
-          <span>Scroll</span>
           <div className="scroll-line" />
+          <span>Scroll</span>
         </div>
       </section>
 
       {/* STATS */}
       <div id="stats">
-        {[
-          { num: "$2.4B", label: "Assets Under Development" },
-          { num: "47", label: "Completed Projects" },
-          { num: "12M", label: "Square Feet Developed" },
-          { num: "18", label: "Years of Excellence" },
-        ].map((s, i) => (
-          <div className={`stat-item reveal reveal-delay-${i + 1}`} key={i}>
-            <div className="stat-number gradient-text">{s.num}</div>
-            <div className="stat-label">{s.label}</div>
+        <div className="stat-item reveal">
+          <div className="stat-number gradient-text">$240M+</div>
+          <div className="stat-label">Assets Under Development</div>
+        </div>
+        <div className="stat-item reveal reveal-delay-1">
+          <div className="stat-number">18</div>
+          <div className="stat-label">Active Projects</div>
+        </div>
+        <div className="stat-item reveal reveal-delay-2">
+          <div className="stat-number gradient-text">360°</div>
+          <div className="stat-label">Full-Cycle Approach</div>
+        </div>
+        <div className="stat-item reveal reveal-delay-3">
+          <div className="stat-number">12</div>
+          <div className="stat-label">Years in Research Triangle</div>
+        </div>
+      </div>
+
+      {/* ABOUT */}
+      <div id="about">
+        <div className="about-visual reveal">
+          <div className="about-img-main">
+            <div className="arch-lines" />
+            <div className="arch-shape" />
+            <div className="arch-shape-2" />
+            <div style={{ position: "absolute", bottom: 32, left: 32 }}>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>Featured Project</div>
+              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>Cary Midtown Tower</div>
+            </div>
           </div>
-        ))}
+          <div className="about-img-accent">
+            <div className="arch-lines" />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(56,189,248,0.08), rgba(30,58,138,0.12))" }} />
+          </div>
+          <div className="about-radius-circle" />
+          <div className="about-radius-circle-2" />
+        </div>
+        <div>
+          <div className="section-label reveal">Our Purpose</div>
+          <h2 className="section-title reveal">
+            The Radius<br />
+            <span className="gradient-text">Philosophy</span>
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.9, color: "#444", marginBottom: 28 }} className="reveal">
+            We see opportunity where others see complexity. Radius Development Group operates at the intersection of data-driven site selection and architectural vision — acquiring, developing, and positioning high-value residential and mixed-use properties across North Carolina's Research Triangle.
+          </p>
+          <p style={{ fontSize: 16, lineHeight: 1.9, color: "#444", marginBottom: 40 }} className="reveal">
+            Our 360-degree model means we control every stage — from identifying undervalued land to delivering fully realized developments that define their neighborhoods.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="reveal">
+            <div style={{ borderTop: "2px solid", borderImage: "var(--grad) 1", paddingTop: 20 }}>
+              <div className="syne" style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.02em" }}>
+                <span className="gradient-text">Cary, NC</span>
+              </div>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: "0.15em", color: "#888", textTransform: "uppercase", marginTop: 4 }}>Headquarters</div>
+            </div>
+            <div style={{ borderTop: "2px solid #000", paddingTop: 20 }}>
+              <div className="syne" style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.02em" }}>Triangle</div>
+              <div className="mono" style={{ fontSize: 10, letterSpacing: "0.15em", color: "#888", textTransform: "uppercase", marginTop: 4 }}>Primary Market</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* PORTFOLIO */}
       <section id="portfolio">
-        <div className="section-label reveal">Selected Work</div>
-        <h2 className="section-title reveal reveal-delay-1">
-          Featured<br />Projects
-        </h2>
+        <div className="section-label reveal">Our Work</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <h2 className="section-title reveal">Featured<br /><span className="gradient-text">Projects</span></h2>
+          <a href="#contact" className="btn-secondary reveal" style={{ marginBottom: 8 }}>View All Projects</a>
+        </div>
         <div className="portfolio-grid">
-          {[
-            { ph: "ph-1", tag: "Commercial", name: "Azure Tower", loc: "Financial District, NYC" },
-            { ph: "ph-2", tag: "Mixed-Use", name: "The Meridian Complex", loc: "Downtown Austin, TX" },
-            { ph: "ph-3", tag: "Residential", name: "Horizon Residences", loc: "Waterfront, Miami" },
-            { ph: "ph-4", tag: "Hospitality", name: "Vertex Hotel & Spa", loc: "Midtown, Chicago" },
-            { ph: "ph-5", tag: "Industrial", name: "Nexus Logistics Hub", loc: "Port District, LA" },
-            { ph: "ph-6", tag: "Retail", name: "Prism Marketplace", loc: "SoHo, New York" },
-          ].map((p, i) => (
-            <div className={`project-card reveal reveal-delay-${(i % 3) + 1}`} key={i}>
-              <div className={`project-card-placeholder ${p.ph}`}>
-                <div className="arch-lines" />
-                <div className="arch-accent" />
-                {i % 2 === 0 && <div className="arch-shape" />}
-                {i % 2 === 1 && <div className="arch-shape-2" />}
-              </div>
-              <div className="project-overlay">
-                <div className="project-info">
-                  <div className="project-tag">{p.tag}</div>
-                  <div className="project-name">{p.name}</div>
-                  <div className="project-location">{p.loc}</div>
+          {/* Project 1 */}
+          <div className="project-card reveal">
+            <div className="project-card-placeholder ph-1">
+              <div className="arch-lines" />
+              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 48, fontWeight: 800, color: "rgba(255,255,255,0.06)", letterSpacing: "-0.04em" }}>MIXED USE</div>
                 </div>
               </div>
+              <div className="arch-accent" />
             </div>
-          ))}
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">Mixed-Use · Cary NC</div>
+                <div className="project-name">Maynard Crossing</div>
+                <div className="project-location">140 Units · Retail + Residential</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 2 */}
+          <div className="project-card reveal reveal-delay-1">
+            <div className="project-card-placeholder ph-2" style={{ minHeight: 580 }}>
+              <div className="arch-lines" />
+              <div style={{ position: "absolute", bottom: "30%", left: "50%", transform: "translateX(-50%) rotate(45deg)", width: 80, height: 80, border: "1px solid rgba(56,189,248,0.25)", borderRadius: "50%" }} />
+              <div className="arch-accent" />
+            </div>
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">Residential · Durham NC</div>
+                <div className="project-name">Ninth Street Residences</div>
+                <div className="project-location">72 Luxury Units · Urban Core</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 3 */}
+          <div className="project-card reveal reveal-delay-2">
+            <div className="project-card-placeholder ph-3">
+              <div className="arch-lines" />
+              <div className="arch-accent" />
+            </div>
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">Commercial · RTP</div>
+                <div className="project-name">Perimeter Park II</div>
+                <div className="project-location">85,000 SF · Class A Office</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 4 */}
+          <div className="project-card reveal reveal-delay-3">
+            <div className="project-card-placeholder ph-4">
+              <div className="arch-lines" />
+              <div className="arch-accent" />
+            </div>
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">Townhomes · Chapel Hill</div>
+                <div className="project-name">Meadowmont South</div>
+                <div className="project-location">48 Townhomes · Transit-Oriented</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 5 */}
+          <div className="project-card reveal">
+            <div className="project-card-placeholder ph-5">
+              <div className="arch-lines" />
+              <div style={{ position: "absolute", top: 30, right: 30, width: 60, height: 60, borderRadius: "50%", border: "1px solid rgba(56,189,248,0.2)" }} />
+              <div className="arch-accent" />
+            </div>
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">BTR Community · Morrisville</div>
+                <div className="project-name">Weston Grove</div>
+                <div className="project-location">120-Unit Build-to-Rent Community</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 6 */}
+          <div className="project-card reveal reveal-delay-1">
+            <div className="project-card-placeholder ph-6">
+              <div className="arch-lines" />
+              <div className="arch-accent" />
+            </div>
+            <div className="project-overlay">
+              <div className="project-info">
+                <div className="project-tag">Industrial · RDU Corridor</div>
+                <div className="project-name">Triangle Commerce Center</div>
+                <div className="project-location">200,000 SF · Last-Mile Logistics</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* SERVICES */}
       <section id="services">
         <div className="section-label reveal">What We Do</div>
-        <h2 className="section-title reveal reveal-delay-1">
-          Full-Spectrum<br />Development
+        <h2 className="section-title reveal" style={{ color: "#fff" }}>
+          360° Development<br /><span className="gradient-text">Process</span>
         </h2>
         <div className="services-grid">
           {[
             {
               num: "01",
-              title: "Ground-Up Development",
-              desc: "From site acquisition through certificate of occupancy, we manage the entire development lifecycle with precision and accountability.",
-              items: ["Site Selection & Acquisition", "Entitlements & Permitting", "Design Management", "Construction Oversight"],
+              title: "Site Sourcing & Acquisition",
+              desc: "We identify high-potential land and assets through proprietary data analysis, local market intelligence, and a deep network of off-market relationships across the Research Triangle.",
+              items: ["Off-market deal sourcing", "Feasibility & zoning analysis", "Acquisition financing", "Environmental due diligence"],
             },
             {
               num: "02",
-              title: "Value-Add Repositioning",
-              desc: "Strategic renovation and repositioning of underperforming assets to unlock hidden value and maximize returns.",
-              items: ["Market Analysis", "Capital Planning", "Renovation Management", "Lease-Up Strategy"],
+              title: "Entitlement & Planning",
+              desc: "Navigating the regulatory landscape requires expertise. We manage municipal relationships, architect selection, and entitlement processes to unlock maximum value from every site.",
+              items: ["Rezoning & variance management", "Architect & engineer selection", "Community engagement", "Permitting & approvals"],
             },
             {
               num: "03",
-              title: "Investment Management",
-              desc: "Disciplined capital allocation and portfolio management delivering consistent risk-adjusted returns to our investment partners.",
-              items: ["Deal Sourcing", "Underwriting & Due Diligence", "Asset Management", "Investor Reporting"],
+              title: "Construction & Development",
+              desc: "From groundbreaking to ribbon-cutting, we manage all phases of construction with trusted general contractors, rigorous cost controls, and an uncompromising commitment to quality.",
+              items: ["GC selection & oversight", "Value engineering", "Budget & schedule management", "Quality control protocols"],
             },
             {
               num: "04",
-              title: "Advisory Services",
-              desc: "Expert guidance for landowners, institutions, and municipalities seeking to maximize the potential of their real estate holdings.",
-              items: ["Highest & Best Use Analysis", "Public-Private Partnerships", "Development Feasibility", "Strategic Planning"],
+              title: "Capital & Exit Strategy",
+              desc: "We structure capital stacks to maximize investor returns and manage dispositions with precision — whether through portfolio sale, recapitalization, or long-term asset management.",
+              items: ["Equity & debt structuring", "Investor reporting", "Asset stabilization", "Disposition & refinancing"],
             },
           ].map((s, i) => (
-            <div className={`service-item reveal reveal-delay-${(i % 2) + 1}`} key={i}>
+            <div className={`service-item reveal ${i % 2 === 1 ? "reveal-delay-1" : ""}`} key={i}>
               <div className="service-num gradient-text">{s.num}</div>
               <div className="service-body">
                 <div className="service-title">{s.title}</div>
-                <div className="service-desc">{s.desc}</div>
+                <p className="service-desc">{s.desc}</p>
                 <ul className="service-list">
-                  {s.items.map((item, j) => (
-                    <li key={j}>{item}</li>
-                  ))}
+                  {s.items.map((item, j) => <li key={j}>{item}</li>)}
                 </ul>
               </div>
             </div>
@@ -154,74 +365,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <div id="about">
-        <div className="about-visual reveal">
-          <div className="about-img-main">
-            <div className="arch-lines" />
-          </div>
-          <div className="about-img-accent">
-            <div className="arch-lines" />
-          </div>
-          <div className="about-radius-circle" />
-          <div className="about-radius-circle-2" />
-        </div>
-        <div>
-          <div className="section-label reveal">About Us</div>
-          <h2 className="section-title reveal reveal-delay-1">
-            Precision Meets<br />Vision
-          </h2>
-          <p className="reveal reveal-delay-2" style={{ fontSize: 15, lineHeight: 1.8, color: "#444", marginBottom: 24 }}>
-            Founded in 2006, Radius Development Group has established itself as a premier real estate development 
-            firm with a portfolio spanning commercial towers, luxury residences, mixed-use complexes, and 
-            institutional facilities across major metropolitan markets.
-          </p>
-          <p className="reveal reveal-delay-3" style={{ fontSize: 15, lineHeight: 1.8, color: "#444", marginBottom: 40 }}>
-            Our approach combines rigorous financial discipline with bold architectural vision. Every project 
-            begins with a deep understanding of market dynamics, community needs, and the potential to create 
-            spaces that transcend the ordinary.
-          </p>
-          <a href="#contact" className="btn-secondary reveal reveal-delay-4">
-            Learn More <ArrowRight />
-          </a>
-        </div>
-      </div>
-
       {/* INVESTORS */}
       <section id="investors">
-        <div className="section-label reveal">For Investors</div>
-        <h2 className="section-title reveal reveal-delay-1">
-          Strategic<br />Partnerships
-        </h2>
+        <div className="section-label reveal">Capital Partners</div>
+        <h2 className="section-title reveal">The Investment<br /><span className="gradient-text">Opportunity</span></h2>
         <div className="investors-inner">
-          <div className="investment-thesis reveal reveal-delay-2">
-            <h3>Our Investment Philosophy</h3>
-            <p>
-              We target opportunities in high-barrier-to-entry markets where our operational expertise 
-              and local relationships create a measurable competitive advantage. Our disciplined approach 
-              to underwriting ensures we only pursue projects that meet our rigorous return thresholds.
+          <div className="investment-thesis">
+            <h3 className="reveal">Why the Research Triangle?</h3>
+            <p className="reveal">
+              Home to Duke, UNC, and NC State, the Research Triangle is one of the fastest-growing metros in the US — combining elite research institutions, a surging tech sector, and housing supply that cannot keep pace with demand. We are positioned at the center of this structural imbalance.
             </p>
-            <h3>Track Record</h3>
-            <p>
-              Across 47 completed projects, Radius has delivered a weighted average IRR of 22% to our 
-              limited partners. Our focus on risk-adjusted returns and capital preservation has resulted 
-              in zero principal losses across our investment history.
+            <h3 className="reveal">Our Track Record</h3>
+            <p className="reveal">
+              Radius has deployed and returned capital across 12+ successful projects, delivering consistent risk-adjusted returns to our investor base. Our vertical integration — owning the development process from acquisition to exit — creates margin advantages unavailable to traditional developers.
             </p>
-            <h3>Current Opportunities</h3>
-            <p>
-              We are currently raising capital for Fund IV, targeting $500M in equity commitments focused 
-              on mixed-use and multifamily developments in Sun Belt and gateway markets.
+            <h3 className="reveal">Who We Partner With</h3>
+            <p className="reveal">
+              We work with family offices, high-net-worth individuals, and institutional capital partners who share a long-term view and an appreciation for real assets in high-growth markets. Minimum investments begin at $250,000.
             </p>
-          </div>
-          <div className="portal-card reveal reveal-delay-3">
-            <div className="portal-tag">Investor Portal</div>
-            <div className="portal-title">Access Your Dashboard</div>
-            <div className="portal-desc">
-              Existing investors can access real-time portfolio performance, quarterly reports, K-1 
-              documents, and capital call notifications through our secure portal.
+            <div style={{ marginTop: 48, display: "flex", gap: 16, flexWrap: "wrap" }} className="reveal">
+              <a href="#contact" className="btn-primary">Request Information</a>
+              <a href="#contact" className="btn-secondary">Schedule a Call</a>
             </div>
+          </div>
+          <div className="portal-card reveal">
+            <div className="portal-tag">Secure Access</div>
+            <div className="portal-title">Investor<br /><span className="gradient-text">Portal</span></div>
+            <p className="portal-desc">
+              Existing capital partners access live deal flow, project dashboards, financials, and distribution schedules through our secure investor portal.
+            </p>
             <ul className="portal-features">
-              {["Real-Time Portfolio Analytics", "Quarterly Performance Reports", "K-1 Tax Documents", "Capital Call Management", "Document Library"].map(
+              {["Live project tracking & dashboards", "Quarterly financial reporting", "Distribution history & projections", "Deal pipeline & co-invest access", "Document vault & tax documents"].map(
                 (f, i) => (
                   <li key={i}>
                     <span className="portal-dot" />
@@ -230,29 +404,52 @@ const Index = () => {
                 )
               )}
             </ul>
-            <button className="btn-portal">
-              Investor Login <ArrowRight />
-            </button>
+            <a href="#contact" className="btn-portal">
+              Access Investor Portal
+              <ArrowRight />
+            </a>
+            <div style={{ marginTop: 20, textAlign: "center" }}>
+              <span className="mono" style={{ fontSize: 10, letterSpacing: "0.1em", color: "#aaa", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <rect x="3" y="7" width="10" height="8" rx="1" stroke="#aaa" strokeWidth="1.2" />
+                  <path d="M5 7V5a3 3 0 016 0v2" stroke="#aaa" strokeWidth="1.2" strokeLinecap="round" />
+                </svg>
+                Bank-level SSL encryption
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* TEAM */}
-      <section id="team">
-        <div className="section-label reveal">Leadership</div>
-        <h2 className="section-title reveal reveal-delay-1">Our Team</h2>
+      <section id="team" style={{ background: "#f8f8f8" }}>
+        <div className="section-label reveal">The Visionaries</div>
+        <h2 className="section-title reveal">Our <span className="gradient-text">Team</span></h2>
+        <p style={{ maxWidth: 500, fontSize: 16, lineHeight: 1.8, color: "#555", marginTop: 16 }} className="reveal">
+          Decades of combined experience in real estate development, finance, and architecture — unified by a single vision.
+        </p>
         <div className="team-grid">
           {[
-            { initials: "MR", name: "Michael Reynolds", role: "Chief Executive Officer" },
-            { initials: "SC", name: "Sarah Chen", role: "Chief Investment Officer" },
-            { initials: "DM", name: "David Martinez", role: "EVP, Development" },
-            { initials: "RK", name: "Rachel Kim", role: "VP, Design & Architecture" },
+            { initials: "JR", name: "James Rafferty", role: "Founder & CEO", bg: "linear-gradient(135deg, #1a1a2e, #0f3460)" },
+            { initials: "MC", name: "Morgan Chen", role: "Chief Investment Officer", bg: "linear-gradient(135deg, #1e293b, #0f172a)" },
+            { initials: "DP", name: "David Park", role: "VP of Development", bg: "linear-gradient(135deg, #1c2333, #161b22)" },
+            { initials: "SE", name: "Sarah Elliott", role: "Director of Capital Markets", bg: "linear-gradient(135deg, #0c1624, #0f2137)" },
           ].map((t, i) => (
-            <div className={`team-card reveal reveal-delay-${i + 1}`} key={i}>
+            <div className={`team-card reveal ${i > 0 ? `reveal-delay-${i}` : ""}`} key={i}>
               <div className="team-photo">
                 <div className="team-photo-inner">
                   <div className="team-photo-placeholder">
-                    <span className="team-initials">{t.initials}</span>
+                    <div className="team-initials" style={{
+                      background: t.bg,
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: i === 0 ? "rgba(56,189,248,0.4)" : i === 1 ? "rgba(29,78,216,0.4)" : i === 2 ? "rgba(14,165,233,0.35)" : "rgba(56,189,248,0.3)"
+                    }}>
+                      <span className="team-initials">{t.initials}</span>
+                    </div>
                   </div>
                   <div className="team-color-overlay" />
                 </div>
@@ -266,56 +463,67 @@ const Index = () => {
 
       {/* CONTACT */}
       <section id="contact">
-        <div className="section-label reveal">Get in Touch</div>
-        <h2 className="section-title reveal reveal-delay-1">
-          Let's Build<br />Together
-        </h2>
+        <div className="section-label reveal">Start the Connection</div>
+        <h2 className="section-title reveal">Let's Build<br /><span className="gradient-text">Together</span></h2>
         <div className="contact-grid">
-          <div className="reveal reveal-delay-2">
-            <div className="contact-info-label">Headquarters</div>
+          <div className="reveal">
+            <div className="contact-info-label">Office</div>
             <div className="contact-info-value">
-              One World Trade Center<br />Suite 8500<br />New York, NY 10007
+              1100 Crescent Green, Suite 200<br />
+              Cary, North Carolina 27518
             </div>
-            <div className="contact-info-label">General Inquiries</div>
-            <div className="contact-info-value">info@radiusdevelopment.com</div>
             <div className="contact-info-label">Phone</div>
-            <div className="contact-info-value">+1 (212) 555-0180</div>
-            <div className="contact-info-label">Investment Inquiries</div>
-            <div className="contact-info-value">invest@radiusdevelopment.com</div>
+            <div className="contact-info-value">(919) 555-0180</div>
+            <div className="contact-info-label">Email</div>
+            <div className="contact-info-value" style={{ background: "var(--grad-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              hello@radiusdevgroup.com
+            </div>
+            <div className="contact-info-label">Hours</div>
+            <div className="contact-info-value">Monday – Friday, 9AM – 6PM EST</div>
             <div className="map-placeholder">
               <div className="map-grid" />
+              {/* Stylized roads */}
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+                <div style={{ position: "absolute", top: "40%", left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.1)" }} />
+                <div style={{ position: "absolute", top: 0, bottom: 0, left: "35%", width: 1, background: "rgba(0,0,0,0.1)" }} />
+                <div style={{ position: "absolute", top: 0, bottom: 0, left: "60%", width: 1, background: "rgba(0,0,0,0.08)" }} />
+                <div style={{ position: "absolute", top: "65%", left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.08)" }} />
+              </div>
               <div className="map-pin">
                 <div className="map-pin-dot" />
-                <div className="map-pin-label">NYC HQ</div>
+                <div className="map-pin-label">Cary, NC</div>
               </div>
             </div>
           </div>
-          <form className="reveal reveal-delay-3" onSubmit={(e) => e.preventDefault()}>
-            <div className="form-group">
-              <label className="form-label">Full Name</label>
-              <input type="text" className="form-input" placeholder="John Smith" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Email Address</label>
-              <input type="email" className="form-input" placeholder="john@company.com" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Inquiry Type</label>
-              <select className="form-select">
-                <option>Development Partnership</option>
-                <option>Investment Opportunity</option>
-                <option>General Inquiry</option>
-                <option>Career Opportunities</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Message</label>
-              <textarea className="form-input" placeholder="Tell us about your project or inquiry..." />
-            </div>
-            <button type="submit" className="btn-submit">
-              Send Message <ArrowRight />
-            </button>
-          </form>
+          <div className="reveal reveal-delay-1">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className="form-label">Full Name</label>
+                <input type="text" className="form-input" placeholder="Your name" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Email Address</label>
+                <input type="email" className="form-input" placeholder="your@email.com" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Subject</label>
+                <select className="form-select">
+                  <option value="" style={{ color: "#ccc" }}>Select an inquiry type</option>
+                  <option>Investor Partnership</option>
+                  <option>Project Collaboration</option>
+                  <option>Land / Site Acquisition</option>
+                  <option>General Inquiry</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Message</label>
+                <textarea className="form-input" placeholder="Tell us about your project or inquiry..." rows={4} />
+              </div>
+              <button type="submit" className="btn-submit">
+                Submit Inquiry <ArrowRight />
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -323,48 +531,49 @@ const Index = () => {
       <footer>
         <div className="footer-grid">
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div className="nav-logo" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
               <div className="nav-logo-icon"><div className="nav-logo-inner" /></div>
-              <span className="syne" style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>Radius</span>
+              <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
+                <span className="syne" style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.02em", color: "#fff" }}>RADIUS</span>
+                <span className="mono" style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Development Group</span>
+              </div>
             </div>
-            <div className="footer-tagline">Building tomorrow's landmarks with precision and vision.</div>
-            <div className="footer-sub">
-              Premium real estate development across commercial, residential, and mixed-use sectors.
-            </div>
+            <p className="footer-tagline">Building Beyond<br /><span className="gradient-text">Limits.</span></p>
+            <p className="footer-sub">Full-cycle real estate development across North Carolina's Research Triangle — from acquisition to exit.</p>
           </div>
           <div>
             <div className="footer-col-title">Company</div>
             <ul className="footer-links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#team">Team</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#">Careers</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#team">Our Team</a></li>
+              <li><a href="#portfolio">Projects</a></li>
+              <li><a href="#contact">Careers</a></li>
             </ul>
           </div>
           <div>
-            <div className="footer-col-title">Projects</div>
+            <div className="footer-col-title">Services</div>
             <ul className="footer-links">
-              <li><a href="#portfolio">Portfolio</a></li>
-              <li><a href="#">Current</a></li>
-              <li><a href="#">Completed</a></li>
-              <li><a href="#">Pipeline</a></li>
+              <li><a href="#services">Acquisition</a></li>
+              <li><a href="#services">Development</a></li>
+              <li><a href="#services">Capital Markets</a></li>
+              <li><a href="#services">Asset Management</a></li>
             </ul>
           </div>
           <div>
-            <div className="footer-col-title">Connect</div>
+            <div className="footer-col-title">Investors</div>
             <ul className="footer-links">
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#investors">Investors</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">Newsletter</a></li>
+              <li><a href="#investors">Investor Portal</a></li>
+              <li><a href="#investors">Investment Thesis</a></li>
+              <li><a href="#contact">Request Info</a></li>
+              <li><a href="#contact">Schedule a Call</a></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-copy">© 2024 Radius Development Group. All rights reserved.</div>
-          <div style={{ display: "flex", gap: 24 }}>
-            <a href="#" style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Privacy</a>
-            <a href="#" style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>Terms</a>
+          <div className="footer-copy">© 2025 Radius Development Group, LLC. All rights reserved.</div>
+          <div className="footer-copy" style={{ display: "flex", gap: 24 }}>
+            <a href="#" style={{ color: "rgba(255,255,255,0.25)", textDecoration: "none", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>Privacy Policy</a>
+            <a href="#" style={{ color: "rgba(255,255,255,0.25)", textDecoration: "none", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>Terms of Use</a>
           </div>
         </div>
       </footer>
