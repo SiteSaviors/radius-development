@@ -117,15 +117,9 @@ const Index = () => {
         <div className="hero-content">
           <div className="hero-label reveal">Raleigh-Durham · Research Triangle · NC</div>
           <h1 className="hero-headline">
-            <div className="reveal">
-              <span style={{ color: "#fff" }} className="text-5xl py-0 my-0 mx-0">BUILDING</span>
-            </div>
-            <div className="reveal reveal-delay-1">
-              <span className="gradient-text text-7xl">BEYOND</span>
-            </div>
-            <div className="reveal reveal-delay-2">
-              <span style={{ color: "#fff" }} className="text-6xl">LIMITS.</span>
-            </div>
+            <div className="reveal">BUILDING</div>
+            <div className="reveal reveal-delay-1"><span className="gradient-text">BEYOND</span></div>
+            <div className="reveal reveal-delay-2">LIMITS.</div>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
             Full-cycle real estate development across the Research Triangle — from site acquisition to strategic exit.
