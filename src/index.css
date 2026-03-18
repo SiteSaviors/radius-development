@@ -9,13 +9,20 @@
   --blue-end: #1E3A8A;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
+html, body {
+  font-family: 'DM Sans', sans-serif !important;
   background: #fff;
   color: #000;
   overflow-x: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#root {
+  font-family: 'DM Sans', sans-serif !important;
+  background: transparent;
+  color: inherit;
 }
 h1, h2, h3, h4, h5, .syne { font-family: 'Syne', sans-serif; }
 .mono { font-family: 'DM Mono', monospace; }
