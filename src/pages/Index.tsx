@@ -24,8 +24,6 @@ const useNavScroll = () => {
 
   useEffect(() => {
     const navbar = document.getElementById("navbar");
-    const logoRadius = document.getElementById("logo-radius");
-    const logoDev = document.getElementById("logo-dev");
     const navLinks = document.querySelectorAll(".nav-link-item");
     const navCta = document.getElementById("nav-cta");
 
@@ -33,15 +31,11 @@ const useNavScroll = () => {
       if (window.scrollY > 80) {
         setScrolled(true);
         setLight(false);
-        if (logoRadius) logoRadius.style.color = "#000";
-        if (logoDev) logoDev.style.color = "#888";
         navLinks.forEach((l) => (l as HTMLElement).style.color = "#000");
         if (navCta) navCta.style.background = "var(--grad)";
       } else {
         setScrolled(false);
         setLight(true);
-        if (logoRadius) logoRadius.style.color = "#fff";
-        if (logoDev) logoDev.style.color = "rgba(255,255,255,0.4)";
         navLinks.forEach((l) => (l as HTMLElement).style.color = "#fff");
       }
     };
@@ -56,6 +50,8 @@ const useNavScroll = () => {
 };
 
 const ArrowRight = () => <span className="arrow-right" />;
+
+const HERO_VIDEO_SRC = "/RADIUS-LOOP%20VIDEO.mp4";
 
 const Index = () => {
   useScrollReveal();
@@ -72,23 +68,7 @@ const Index = () => {
       {/* NAVIGATION */}
       <nav id="navbar" className={`site-nav ${scrolled ? "scrolled" : ""} ${light && !scrolled ? "light" : ""}`}>
         <a href="#hero" className="nav-logo">
-          <div className="nav-logo-icon"><div className="nav-logo-inner" /></div>
-          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-            <span
-              className="syne nav-logo-text"
-              style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.02em", color: "#fff", transition: "color 0.4s" }}
-              id="logo-radius">
-              
-              RADIUS
-            </span>
-            <span
-              className="mono nav-logo-text"
-              style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.5)", transition: "color 0.4s", textTransform: "uppercase" }}
-              id="logo-dev">
-              
-              Development Group
-            </span>
-          </div>
+          <span className="nav-wordmark">radius</span>
         </a>
         <ul className="nav-links" id="nav-links">
           <li><a href="#about" style={{ color: "#fff" }} className="nav-link-item">About</a></li>
@@ -110,6 +90,16 @@ const Index = () => {
 
       {/* HERO */}
       <section id="hero">
+        <video
+          className="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
         <div className="hero-bg" />
         <div className="hero-grid-lines" />
         <div className="hero-circle" style={{ width: 600, height: 600, top: "50%", right: -200, transform: "translateY(-50%)" }} />
