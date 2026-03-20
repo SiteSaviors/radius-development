@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { featuredProjectMedia, portfolioProjectMedia } from "@/data/projectMedia";
 
 const useScrollReveal = () => {
   useEffect(() => {
@@ -52,6 +53,13 @@ const useNavScroll = () => {
 const ArrowRight = () => <span className="arrow-right" />;
 
 const HERO_VIDEO_SRC = "/RADIUS-LOOP%20VIDEO.mp4";
+const FEATURED_PROJECT_IMAGE_STYLE = featuredProjectMedia.imageSrc ?
+{
+  backgroundImage: `linear-gradient(160deg, rgba(11, 18, 32, 0.18), rgba(11, 18, 32, 0.38)), url('${featuredProjectMedia.imageSrc}')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center"
+} :
+undefined;
 
 const Index = () => {
   useScrollReveal();
@@ -152,13 +160,13 @@ const Index = () => {
       {/* ABOUT */}
       <div id="about">
         <div className="about-visual reveal">
-          <div className="about-img-main">
+          <div className={`about-img-main ${featuredProjectMedia.imageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_IMAGE_STYLE}>
             <div className="arch-lines" />
             <div className="arch-shape" />
             <div className="arch-shape-2" />
             <div style={{ position: "absolute", bottom: 32, left: 32 }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>Featured Project</div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>Cary Midtown Tower</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>{featuredProjectMedia.label}</div>
+              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>{featuredProjectMedia.name}</div>
             </div>
           </div>
           <div className="about-img-accent">
@@ -203,102 +211,44 @@ const Index = () => {
           <a href="#contact" className="btn-secondary reveal" style={{ marginBottom: 8 }}>View All Projects</a>
         </div>
         <div className="portfolio-grid">
-          {/* Project 1 */}
-          <div className="project-card reveal">
-            <div className="project-card-placeholder ph-1">
-              <div className="arch-lines" />
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 48, fontWeight: 800, color: "rgba(255,255,255,0.06)", letterSpacing: "-0.04em" }}>MIXED USE</div>
+          {portfolioProjectMedia.map((project, i) => {
+            const revealDelayClass = i > 0 ? `reveal-delay-${Math.min(i, 3)}` : "";
+            const projectImageStyle = project.imageSrc ?
+            {
+              backgroundImage: `linear-gradient(160deg, rgba(10, 18, 32, 0.18), rgba(10, 18, 32, 0.4)), url('${project.imageSrc}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            } :
+            undefined;
+
+            return (
+              <div className={`project-card reveal ${revealDelayClass}`} key={project.name}>
+                <div
+                  className={`project-card-placeholder ${project.placeholderClass} ${project.imageSrc ? "project-card-has-image" : ""}`}
+                  style={{ minHeight: project.minHeight, ...projectImageStyle }}>
+                  <div className="arch-lines" />
+                  {project.headline ?
+                  <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 48, fontWeight: 800, color: "rgba(255,255,255,0.06)", letterSpacing: "-0.04em" }}>{project.headline}</div>
+                      </div>
+                    </div> :
+                  null}
+                  {project.accent === "circle" ?
+                  <div style={{ position: "absolute", bottom: project.minHeight ? "30%" : "auto", top: project.minHeight ? "auto" : 30, left: project.minHeight ? "50%" : "auto", right: project.minHeight ? "auto" : 30, transform: project.minHeight ? "translateX(-50%) rotate(45deg)" : "none", width: project.minHeight ? 80 : 60, height: project.minHeight ? 80 : 60, borderRadius: "50%", border: "1px solid rgba(56,189,248,0.2)" }} /> :
+                  null}
+                  <div className="arch-accent" />
+                </div>
+                <div className="project-overlay">
+                  <div className="project-info">
+                    <div className="project-tag">{project.tag}</div>
+                    <div className="project-name">{project.name}</div>
+                    <div className="project-location">{project.location}</div>
+                  </div>
                 </div>
               </div>
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">Mixed-Use · Cary NC</div>
-                <div className="project-name">Maynard Crossing</div>
-                <div className="project-location">140 Units · Retail + Residential</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 2 */}
-          <div className="project-card reveal reveal-delay-1">
-            <div className="project-card-placeholder ph-2" style={{ minHeight: 580 }}>
-              <div className="arch-lines" />
-              <div style={{ position: "absolute", bottom: "30%", left: "50%", transform: "translateX(-50%) rotate(45deg)", width: 80, height: 80, border: "1px solid rgba(56,189,248,0.25)", borderRadius: "50%" }} />
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">Residential · Durham NC</div>
-                <div className="project-name">Ninth Street Residences</div>
-                <div className="project-location">72 Luxury Units · Urban Core</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 3 */}
-          <div className="project-card reveal reveal-delay-2">
-            <div className="project-card-placeholder ph-3">
-              <div className="arch-lines" />
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">Commercial · RTP</div>
-                <div className="project-name">Perimeter Park II</div>
-                <div className="project-location">85,000 SF · Class A Office</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 4 */}
-          <div className="project-card reveal reveal-delay-3">
-            <div className="project-card-placeholder ph-4">
-              <div className="arch-lines" />
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">Townhomes · Chapel Hill</div>
-                <div className="project-name">Meadowmont South</div>
-                <div className="project-location">48 Townhomes · Transit-Oriented</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 5 */}
-          <div className="project-card reveal">
-            <div className="project-card-placeholder ph-5">
-              <div className="arch-lines" />
-              <div style={{ position: "absolute", top: 30, right: 30, width: 60, height: 60, borderRadius: "50%", border: "1px solid rgba(56,189,248,0.2)" }} />
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">BTR Community · Morrisville</div>
-                <div className="project-name">Weston Grove</div>
-                <div className="project-location">120-Unit Build-to-Rent Community</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 6 */}
-          <div className="project-card reveal reveal-delay-1">
-            <div className="project-card-placeholder ph-6">
-              <div className="arch-lines" />
-              <div className="arch-accent" />
-            </div>
-            <div className="project-overlay">
-              <div className="project-info">
-                <div className="project-tag">Industrial · RDU Corridor</div>
-                <div className="project-name">Triangle Commerce Center</div>
-                <div className="project-location">200,000 SF · Last-Mile Logistics</div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </section>
 

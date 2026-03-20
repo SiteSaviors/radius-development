@@ -16,6 +16,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Sackers Gothic Std Light';
+  src: url('/fonts/Sackers-Gothic-Std-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
   --grad: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 20%, #0284C7 45%, #1D4ED8 70%, #1E3A8A 100%);
   --grad-text: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 30%, #2563EB 65%, #1E3A8A 100%);
@@ -26,7 +33,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 html, body {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Syne', sans-serif !important;
   background: #fff;
   color: #000;
   overflow-x: hidden;
@@ -34,7 +41,7 @@ html, body {
   padding: 0 !important;
 }
 #root {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Syne', sans-serif !important;
   background: transparent;
   color: inherit;
 }
@@ -99,8 +106,8 @@ nav.site-nav.scrolled {
 }
 .nav-links { display: flex; gap: 40px; list-style: none; }
 .nav-links a {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-family: 'Sackers Gothic Std Light', serif;
+  font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
@@ -177,8 +184,8 @@ nav.site-nav.light .nav-links a { color: #fff; }
 }
 .hero-content { position: relative; z-index: 2; padding: 120px 60px 0; width: 100%; }
 .hero-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 15px;
+  font-family: 'Sackers Gothic Std Light', serif;
+  font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.4);
@@ -205,13 +212,13 @@ nav.site-nav.light .nav-links a { color: #fff; }
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
 }
 .hero-sub {
-  font-family: 'Poppins';
-  font-size: 17px;
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
   font-weight: 500;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.663);
   letter-spacing: 0.01em;
-  max-width: 580px;
+  max-width: 600px;
   margin-bottom: 48px;
 }
 .btn-primary {
@@ -220,7 +227,7 @@ nav.site-nav.light .nav-links a { color: #fff; }
   gap: 12px;
   background: var(--grad);
   color: #fff;
-  font-family: 'DM Mono', monospace;
+  font-family: 'Sackers Gothic Std Light', serif;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -237,7 +244,7 @@ nav.site-nav.light .nav-links a { color: #fff; }
   gap: 12px;
   background: transparent;
   color: #000;
-  font-family: 'DM Mono', monospace;
+  font-family: 'Sackers Gothic Std Light', serif;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -325,10 +332,10 @@ section { padding: 120px 60px; }
 .stat-item:last-child { border-right: none; }
 .stat-number {
   font-family: 'Syne', sans-serif;
-  font-size: 56px;
+  font-size: 60px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.001em;
 }
 .stat-label {
   font-family: 'DM Mono', monospace;
