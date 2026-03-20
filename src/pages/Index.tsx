@@ -55,14 +55,14 @@ const ArrowRight = () => <span className="arrow-right" />;
 const HERO_VIDEO_SRC = "/RADIUS-LOOP%20VIDEO.mp4";
 const FEATURED_PROJECT_IMAGE_STYLE = featuredProjectMedia.imageSrc ?
 {
-  backgroundImage: `linear-gradient(160deg, rgba(11, 18, 32, 0.18), rgba(11, 18, 32, 0.38)), url('${featuredProjectMedia.imageSrc}')`,
+  backgroundImage: `url('${featuredProjectMedia.imageSrc}')`,
   backgroundSize: "cover",
   backgroundPosition: "center"
 } :
 undefined;
 const FEATURED_PROJECT_ACCENT_IMAGE_STYLE = featuredProjectMedia.accentImageSrc ?
 {
-  backgroundImage: `linear-gradient(160deg, rgba(11, 18, 32, 0.1), rgba(11, 18, 32, 0.28)), url('${featuredProjectMedia.accentImageSrc}')`,
+  backgroundImage: `url('${featuredProjectMedia.accentImageSrc}')`,
   backgroundSize: "cover",
   backgroundPosition: "center"
 } :
@@ -169,8 +169,6 @@ const Index = () => {
         <div className="about-visual reveal">
           <div className={`about-img-main ${featuredProjectMedia.imageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_IMAGE_STYLE}>
             <div className="arch-lines" />
-            <div className="arch-shape" />
-            <div className="arch-shape-2" />
             <div style={{ position: "absolute", bottom: 32, left: 32 }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>{featuredProjectMedia.label}</div>
               <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>{featuredProjectMedia.name}</div>
@@ -178,10 +176,7 @@ const Index = () => {
           </div>
           <div className={`about-img-accent ${featuredProjectMedia.accentImageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_ACCENT_IMAGE_STYLE}>
             <div className="arch-lines" />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(56,189,248,0.08), rgba(30,58,138,0.12))" }} />
           </div>
-          <div className="about-radius-circle" />
-          <div className="about-radius-circle-2" />
         </div>
         <div>
           <div className="section-label reveal">Our Purpose</div>
