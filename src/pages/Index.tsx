@@ -170,8 +170,8 @@ const Index = () => {
           <div className={`about-img-main ${featuredProjectMedia.imageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_IMAGE_STYLE}>
             <div className="arch-lines" />
             <div style={{ position: "absolute", bottom: 32, left: 32 }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>{featuredProjectMedia.label}</div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>{featuredProjectMedia.name}</div>
+              <div style={{ fontFamily: "'Sackers Gothic Std Light', serif", fontSize: 8, letterSpacing: "0.2em", color: "#fff", textTransform: "uppercase", marginBottom: 8 }}>{featuredProjectMedia.label}</div>
+              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 23, fontWeight: 700, color: "#fff" }}>{featuredProjectMedia.name}</div>
             </div>
           </div>
           <div className={`about-img-accent ${featuredProjectMedia.accentImageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_ACCENT_IMAGE_STYLE}>
