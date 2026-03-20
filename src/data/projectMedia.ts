@@ -2,6 +2,7 @@ export type FeaturedProjectMedia = {
   label: string;
   name: string;
   imageSrc?: string;
+  accentImageSrc?: string;
 };
 
 export type PortfolioProjectMedia = {
@@ -20,6 +21,7 @@ export const featuredProjectMedia: FeaturedProjectMedia = {
   label: "Featured Project",
   name: "The Shiloh",
   imageSrc: "/projects/the-shiloh.jpeg",
+  accentImageSrc: "/projects/The-Shiloh-3.jpeg",
 };
 
 export const portfolioProjectMedia: PortfolioProjectMedia[] = [

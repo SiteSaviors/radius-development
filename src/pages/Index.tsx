@@ -60,6 +60,13 @@ const FEATURED_PROJECT_IMAGE_STYLE = featuredProjectMedia.imageSrc ?
   backgroundPosition: "center"
 } :
 undefined;
+const FEATURED_PROJECT_ACCENT_IMAGE_STYLE = featuredProjectMedia.accentImageSrc ?
+{
+  backgroundImage: `linear-gradient(160deg, rgba(11, 18, 32, 0.1), rgba(11, 18, 32, 0.28)), url('${featuredProjectMedia.accentImageSrc}')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center"
+} :
+undefined;
 
 const Index = () => {
   useScrollReveal();
@@ -169,7 +176,7 @@ const Index = () => {
               <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 700, color: "#fff" }}>{featuredProjectMedia.name}</div>
             </div>
           </div>
-          <div className="about-img-accent">
+          <div className={`about-img-accent ${featuredProjectMedia.accentImageSrc ? "about-img-photo" : ""}`} style={FEATURED_PROJECT_ACCENT_IMAGE_STYLE}>
             <div className="arch-lines" />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(56,189,248,0.08), rgba(30,58,138,0.12))" }} />
           </div>

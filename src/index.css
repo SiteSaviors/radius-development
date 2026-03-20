@@ -316,20 +316,31 @@ section { padding: 120px 60px; }
 
 /* === STATS BAR === */
 #stats {
-  padding: 60px;
+  padding: 40px 60px;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 .stat-item {
-  padding: 40px 0;
-  border-right: 1px solid #000;
-  padding-right: 60px;
-  padding-left: 60px;
+  position: relative;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.stat-item:first-child { padding-left: 0; }
-.stat-item:last-child { border-right: none; }
+.stat-item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 1px;
+  background: #000;
+}
+.stat-item:last-child::after { display: none; }
 .stat-number {
   font-family: 'Syne', sans-serif;
   font-size: 60px;
@@ -344,6 +355,7 @@ section { padding: 120px 60px; }
   text-transform: uppercase;
   color: #888;
   margin-top: 8px;
+  max-width: 18ch;
 }
 
 /* === PORTFOLIO === */
@@ -538,6 +550,11 @@ section { padding: 120px 60px; }
   background: linear-gradient(160deg, #111827 0%, #1e293b 100%);
   border: 4px solid #fff;
   overflow: hidden;
+}
+.about-img-photo {
+  background-color: #101828;
+  background-size: cover;
+  background-position: center;
 }
 .about-radius-circle {
   position: absolute;
@@ -925,9 +942,14 @@ footer {
   nav.site-nav.scrolled { padding: 14px 30px; }
   section { padding: 80px 30px; }
   #about { padding: 80px 30px; grid-template-columns: 1fr; }
-  #stats { padding: 40px 30px; grid-template-columns: repeat(2, 1fr); }
-  .stat-item:nth-child(2) { border-right: none; }
-  .stat-item:nth-child(3) { border-right: 1px solid #000; border-top: 1px solid #000; }
+  #stats { padding: 28px 30px; grid-template-columns: repeat(2, 1fr); }
+  .stat-item { padding: 24px 20px; }
+  .stat-item::after {
+    top: 22%;
+    bottom: 22%;
+  }
+  .stat-item:nth-child(2)::after { display: none; }
+  .stat-item:nth-child(3),
   .stat-item:nth-child(4) { border-top: 1px solid #000; }
   .investors-inner { grid-template-columns: 1fr; gap: 60px; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
