@@ -217,7 +217,9 @@ const Index = () => {
             const revealDelayClass = i > 0 ? `reveal-delay-${Math.min(i, 3)}` : "";
             const projectImageStyle = project.imageSrc ?
             {
-              backgroundImage: `linear-gradient(160deg, rgba(10, 18, 32, 0.18), rgba(10, 18, 32, 0.4)), url('${project.imageSrc}')`,
+              backgroundImage: project.disableImageOverlay ?
+              `url('${project.imageSrc}')` :
+              `linear-gradient(160deg, rgba(10, 18, 32, 0.18), rgba(10, 18, 32, 0.4)), url('${project.imageSrc}')`,
               backgroundSize: "cover",
               backgroundPosition: "center"
             } :
@@ -229,7 +231,7 @@ const Index = () => {
                   className={`project-card-placeholder ${project.placeholderClass} ${project.imageSrc ? "project-card-has-image" : ""}`}
                   style={{ minHeight: project.minHeight, ...projectImageStyle }}>
                   <div className="arch-lines" />
-                  {project.headline ?
+                  {project.headline && !project.disableImageOverlay ?
                   <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <div style={{ textAlign: "center" }}>
                         <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 48, fontWeight: 800, color: "rgba(255,255,255,0.06)", letterSpacing: "-0.04em" }}>{project.headline}</div>

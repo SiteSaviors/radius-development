@@ -11,6 +11,7 @@ export type PortfolioProjectMedia = {
   location: string;
   placeholderClass: string;
   imageSrc?: string;
+  disableImageOverlay?: boolean;
   minHeight?: number;
   accent?: "circle" | "none";
   headline?: string;
@@ -27,11 +28,11 @@ export const featuredProjectMedia: FeaturedProjectMedia = {
 export const portfolioProjectMedia: PortfolioProjectMedia[] = [
   {
     tag: "Mixed-Use · Cary NC",
-    name: "Maynard Crossing",
+    name: "The Franklin",
     location: "140 Units · Retail + Residential",
     placeholderClass: "ph-1",
-    imageSrc: "/projects/maynard-crossing.jpg",
-    headline: "MIXED USE",
+    imageSrc: "/projects/the-franklin.jpeg",
+    disableImageOverlay: true,
   },
   {
     tag: "Residential · Durham NC",
