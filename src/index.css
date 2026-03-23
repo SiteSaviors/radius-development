@@ -1013,6 +1013,47 @@ footer {
 }
 
 @media (max-width: 767px) {
+  .about-visual {
+    height: clamp(320px, 88vw, 520px);
+  }
+  .about-img-main {
+    width: 74%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .about-img-accent {
+    width: 48%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  #stats {
+    padding: 18px 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat-item {
+    min-width: 0;
+    padding: 20px 12px;
+  }
+  .stat-item::after {
+    top: 18%;
+    bottom: 18%;
+  }
+  .stat-item:nth-child(2)::after {
+    display: none;
+  }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4) {
+    border-top: 1px solid #000;
+  }
+  .stat-number {
+    font-size: clamp(12px, 8vw, 26px);
+  }
+  .stat-label {
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  max-width: none;
+  white-space: nowrap;
+}
   nav.site-nav {
     padding: 18px 20px;
     align-items: center;
