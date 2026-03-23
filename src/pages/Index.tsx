@@ -51,6 +51,14 @@ const useNavScroll = () => {
 };
 
 const ArrowRight = () => <span className="arrow-right" />;
+const NAV_ITEMS = [
+  { href: "#about", label: "About" },
+  { href: "#portfolio", label: "Projects" },
+  { href: "#services", label: "Services" },
+  { href: "#investors", label: "Investors" },
+  { href: "#team", label: "Team" },
+  { href: "#contact", label: "Contact" },
+];
 
 const HERO_VIDEO_SRC = "/RADIUS-LOOP%20VIDEO.mp4";
 const FEATURED_PROJECT_IMAGE_STYLE = featuredProjectMedia.imageSrc ?
@@ -71,11 +79,27 @@ undefined;
 const Index = () => {
   useScrollReveal();
   const { scrolled, light } = useNavScroll();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     const btn = (e.target as HTMLFormElement).querySelector(".btn-submit");
     if (btn) btn.innerHTML = "✓ Inquiry Received";
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
   }, []);
 
   return (
@@ -86,12 +110,9 @@ const Index = () => {
           <span className="nav-wordmark">radius</span>
         </a>
         <ul className="nav-links" id="nav-links">
-          <li><a href="#about" style={{ color: "#fff" }} className="nav-link-item">About</a></li>
-          <li><a href="#portfolio" style={{ color: "#fff" }} className="nav-link-item">Projects</a></li>
-          <li><a href="#services" style={{ color: "#fff" }} className="nav-link-item">Services</a></li>
-          <li><a href="#investors" style={{ color: "#fff" }} className="nav-link-item">Investors</a></li>
-          <li><a href="#team" style={{ color: "#fff" }} className="nav-link-item">Team</a></li>
-          <li><a href="#contact" style={{ color: "#fff" }} className="nav-link-item">Contact</a></li>
+          {NAV_ITEMS.map((item) =>
+          <li key={item.href}><a href={item.href} style={{ color: "#fff" }} className="nav-link-item">{item.label}</a></li>
+          )}
         </ul>
         <a
           href="#investors"
@@ -101,6 +122,27 @@ const Index = () => {
           
           Investor Portal
         </a>
+        <button
+          type="button"
+          className={`nav-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((current) => !current)}>
+          <span className="nav-menu-toggle-bar" />
+          <span className="nav-menu-toggle-bar" />
+          <span className="nav-menu-toggle-bar" />
+        </button>
+        <div className={`nav-mobile-sheet ${mobileMenuOpen ? "open" : ""}`}>
+          {NAV_ITEMS.map((item) =>
+          <a key={item.href} href={item.href} className="nav-mobile-link" onClick={closeMobileMenu}>
+              {item.label}
+            </a>
+          )}
+          <a href="#investors" className="btn-primary nav-mobile-cta" onClick={closeMobileMenu}>
+            Investor Portal
+            <ArrowRight />
+          </a>
+        </div>
       </nav>
 
       {/* HERO */}
@@ -129,7 +171,7 @@ const Index = () => {
           <p className="hero-sub reveal reveal-delay-3">
             Full-cycle real estate development across the Research Triangle — from site acquisition to strategic exit.
           </p>
-          <div className="reveal reveal-delay-4" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+          <div className="hero-actions reveal reveal-delay-4">
             <a href="#portfolio" className="btn-primary">
               View Projects <span className="arrow-right" style={{ background: "#fff" }} />
             </a>
