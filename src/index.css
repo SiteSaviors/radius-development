@@ -394,15 +394,15 @@ section { padding: 120px 60px; }
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s ease;
   display: flex;
   align-items: flex-end;
   padding: 28px;
 }
-.project-card:hover .project-overlay { opacity: 1; }
-.project-info { transform: translateY(10px); transition: transform 0.4s ease; }
-.project-card:hover .project-info { transform: translateY(0); }
+.project-card:hover .project-overlay { opacity: 0; }
+.project-info { transform: translateY(0); transition: transform 0.4s ease; }
+.project-card:hover .project-info { transform: translateY(10px); }
 .project-tag {
   font-family: 'DM Mono', monospace;
   font-size: 9px;
