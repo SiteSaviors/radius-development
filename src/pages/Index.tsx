@@ -368,26 +368,17 @@ const Index = () => {
         </p>
         <div className="team-grid">
           {[
-          { initials: "JR", name: "James Rafferty", role: "Founder & CEO", bg: "linear-gradient(135deg, #1a1a2e, #0f3460)" },
-          { initials: "MC", name: "Morgan Chen", role: "Chief Investment Officer", bg: "linear-gradient(135deg, #1e293b, #0f172a)" },
-          { initials: "DP", name: "David Park", role: "VP of Development", bg: "linear-gradient(135deg, #1c2333, #161b22)" },
-          { initials: "SE", name: "Sarah Elliott", role: "Director of Capital Markets", bg: "linear-gradient(135deg, #0c1624, #0f2137)" }].
+          { initials: "RJ", name: "Ricky Joshi", role: "General Partner", imageSrc: "/projects/1.jpg" },
+          { initials: "GG", name: "Gaurang Gala", role: "General Partner", imageSrc: "/projects/2.jpg" },
+          { initials: "TM", name: "Tarek Morshed", role: "General Partner", imageSrc: "/projects/3.jpg" },
+          { initials: "EE", name: "Elizabeth Eichen", role: "Head of Investor Relations", imageSrc: "/projects/4.jpg" }].
           map((t, i) =>
           <div className={`team-card reveal ${i > 0 ? `reveal-delay-${i}` : ""}`} key={i}>
               <div className="team-photo">
                 <div className="team-photo-inner">
-                  <div className="team-photo-placeholder">
-                    <div className="team-initials" style={{
-                    background: t.bg,
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: i === 0 ? "rgba(56,189,248,0.4)" : i === 1 ? "rgba(29,78,216,0.4)" : i === 2 ? "rgba(14,165,233,0.35)" : "rgba(56,189,248,0.3)"
-                  }}>
-                      <span className="team-initials">{t.initials}</span>
-                    </div>
+                  <div
+                    className="team-photo-placeholder team-photo-image"
+                    style={{ backgroundImage: `url('${t.imageSrc}')` }}>
                   </div>
                   <div className="team-color-overlay" />
                 </div>
