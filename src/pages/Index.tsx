@@ -412,11 +412,9 @@ const Index = () => {
         <p style={{ maxWidth: 500, fontSize: 16, lineHeight: 1.8, color: "#555", marginTop: 16 }} className="reveal">
           Decades of combined experience in real estate development, finance, and architecture — unified by a single vision.
         </p>
-        <div className="team-grid">
+        <div className="team-grid team-grid-two">
           {[
-          { initials: "RJ", name: "Ricky Joshi", role: "General Partner", imageSrc: "/projects/1.jpg" },
           { initials: "GG", name: "Gaurang Gala", role: "General Partner", imageSrc: "/projects/2.jpg" },
-          { initials: "TM", name: "Tarek Morshed", role: "General Partner", imageSrc: "/projects/3.jpg" },
           { initials: "EE", name: "Elizabeth Eichen", role: "Head of Investor Relations", imageSrc: "/projects/4.jpg" }].
           map((t, i) =>
           <div className={`team-card reveal ${i > 0 ? `reveal-delay-${i}` : ""}`} key={i}>
