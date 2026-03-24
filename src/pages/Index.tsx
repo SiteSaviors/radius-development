@@ -507,7 +507,7 @@ const Index = () => {
             <div className="nav-logo" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
               <img src="/projects/Gala-Investments.png" alt="Gala Investments" className="footer-logo-image" />
             </div>
-            <p className="footer-tagline">Building Beyond<br /><span className="gradient-text">Limits.</span></p>
+            <p className="footer-tagline">Investing Made<br /><span className="gradient-text">Simple.</span></p>
             <p className="footer-sub">Full-cycle real estate development across North Carolina's Research Triangle — from acquisition to exit.</p>
           </div>
           <div>
