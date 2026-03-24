@@ -1,3 +1,3 @@
-# Radius Development Group
+# Gala Investments
 
-Website source for Radius Development Group.
+Website source for Gala Investments.

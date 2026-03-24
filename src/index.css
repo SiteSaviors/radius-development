@@ -369,6 +369,7 @@ section { padding: 120px 60px; }
 
 /* === STATS BAR === */
 #stats {
+  background: #fff;
   padding: 40px 60px;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -539,7 +540,7 @@ section { padding: 120px 60px; }
 .service-item:nth-child(even) { padding-left: 80px; }
 .service-num {
   font-family: 'Syne', sans-serif;
-  font-size: 72px;
+  font-size: 60px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -738,11 +739,28 @@ section { padding: 120px 60px; }
 
 /* === TEAM === */
 #team { background: #f8f8f8; }
+#team .section-label {
+  justify-content: center;
+}
+#team .section-title {
+  text-align: center;
+}
+#team > p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 .team-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
   margin-top: 80px;
+}
+.team-grid.team-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .team-card { position: relative; cursor: pointer; }
 .team-photo {
@@ -948,6 +966,11 @@ footer {
   color: #fff;
   margin: 0;
   margin-top: auto;
+}
+.footer-logo-image {
+  display: block;
+  width: auto;
+  height: 52px;
 }
 .footer-grid {
   display: grid;

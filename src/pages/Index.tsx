@@ -227,7 +227,7 @@ const Index = () => {
         <div>
           <div className="section-label reveal">Our Purpose</div>
           <h2 className="section-title reveal">
-            The Radius<br />
+            The Gala<br />
             <span className="gradient-text">Philosophy</span>
           </h2>
           <p style={{ fontSize: 16, lineHeight: 1.9, color: "#444", marginBottom: 28 }} className="reveal">
@@ -361,7 +361,7 @@ const Index = () => {
             </p>
             <h3 className="reveal">Our Track Record</h3>
             <p className="reveal">
-              Radius has deployed and returned capital across 12+ successful projects, delivering consistent risk-adjusted returns to our investor base. Our vertical integration — owning the development process from acquisition to exit — creates margin advantages unavailable to traditional developers.
+              Gala Investments has deployed and returned capital across 12+ successful projects, delivering consistent risk-adjusted returns to our investor base. Our vertical integration — owning the development process from acquisition to exit — creates margin advantages unavailable to traditional developers.
             </p>
             <h3 className="reveal">Who We Partner With</h3>
             <p className="reveal">
@@ -449,7 +449,7 @@ const Index = () => {
             <div className="contact-info-value">(919) 455-7455</div>
             <div className="contact-info-label">Email</div>
             <div className="contact-info-value" style={{ background: "var(--grad-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              hello@radiusdevgroup.com
+              info@galainvestments.io
             </div>
             <div className="contact-info-label">Hours</div>
             <div className="contact-info-value">Monday – Friday, 9AM – 6PM EST</div>
@@ -505,11 +505,7 @@ const Index = () => {
         <div className="footer-grid">
           <div>
             <div className="nav-logo" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
-              <div className="nav-logo-icon"><div className="nav-logo-inner" /></div>
-              <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-                <span className="syne" style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-0.02em", color: "#fff" }}>RADIUS</span>
-                <span className="mono" style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Development Group</span>
-              </div>
+              <img src="/projects/Gala-Investments.png" alt="Gala Investments" className="footer-logo-image" />
             </div>
             <p className="footer-tagline">Building Beyond<br /><span className="gradient-text">Limits.</span></p>
             <p className="footer-sub">Full-cycle real estate development across North Carolina's Research Triangle — from acquisition to exit.</p>
