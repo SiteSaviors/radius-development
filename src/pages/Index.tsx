@@ -168,9 +168,9 @@ const Index = () => {
         <div className="hero-content">
           <div className="hero-label reveal">Raleigh-Durham · Research Triangle · NC</div>
           <h1 className="hero-headline">
-            <div className="reveal">BUILDING</div>
-            <div className="reveal reveal-delay-1"><span className="gradient-text">BEYOND</span></div>
-            <div className="reveal reveal-delay-2">LIMITS.</div>
+            <div className="reveal">INVESTING</div>
+            <div className="reveal reveal-delay-1"><span className="gradient-text">MADE</span></div>
+            <div className="reveal reveal-delay-2">SIMPLE.</div>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
             Full-cycle real estate development across the Research Triangle — from site acquisition to strategic exit.
