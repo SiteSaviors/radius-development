@@ -44,6 +44,8 @@ html, body {
   font-family: 'Syne', sans-serif !important;
   background: transparent;
   color: inherit;
+  margin: 0;
+  padding: 0;
 }
 h1, h2, h3, h4, h5, .syne { font-family: 'Syne', sans-serif; }
 .mono { font-family: 'DM Mono', monospace; }
@@ -940,6 +942,7 @@ footer {
   background: #000;
   padding: 80px 60px 40px;
   color: #fff;
+  margin: 0;
 }
 .footer-grid {
   display: grid;
