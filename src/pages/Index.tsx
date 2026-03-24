@@ -107,7 +107,11 @@ const Index = () => {
       {/* NAVIGATION */}
       <nav id="navbar" className={`site-nav ${scrolled ? "scrolled" : ""} ${light && !scrolled ? "light" : ""}`}>
         <a href="#hero" className="nav-logo">
-          <span className="nav-wordmark">radius</span>
+          <img
+            src={scrolled ? "/projects/Gala-investments-black.png" : "/projects/Gala-Investments.png"}
+            alt="GALA Investments"
+            className="nav-logo-image"
+          />
         </a>
         <ul className="nav-links" id="nav-links">
           {NAV_ITEMS.map((item) =>
@@ -227,7 +231,7 @@ const Index = () => {
             <span className="gradient-text">Philosophy</span>
           </h2>
           <p style={{ fontSize: 16, lineHeight: 1.9, color: "#444", marginBottom: 28 }} className="reveal">
-            We see opportunity where others see complexity. Radius Development Group operates at the intersection of data-driven site selection and architectural vision — acquiring, developing, and positioning high-value residential and mixed-use properties across North Carolina's Research Triangle.
+            We see opportunity where others see complexity. Gala Investments operates at the intersection of data-driven site selection and architectural vision — acquiring, developing, and positioning high-value residential and mixed-use properties across North Carolina's Research Triangle.
           </p>
           <p style={{ fontSize: 16, lineHeight: 1.9, color: "#444", marginBottom: 40 }} className="reveal">
             Our 360-degree model means we control every stage — from identifying undervalued land to delivering fully realized developments that define their neighborhoods.
@@ -541,7 +545,7 @@ const Index = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="footer-copy">© 2025 Radius Development Group, LLC. All rights reserved.</div>
+          <div className="footer-copy">© 2026 Gala Investments, LLC. All rights reserved.</div>
           <div className="footer-copy" style={{ display: "flex", gap: 24 }}>
             <a href="#" style={{ color: "rgba(255,255,255,0.25)", textDecoration: "none", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>Privacy Policy</a>
             <a href="#" style={{ color: "rgba(255,255,255,0.25)", textDecoration: "none", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>Terms of Use</a>

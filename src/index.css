@@ -90,6 +90,14 @@ nav.site-nav.scrolled {
   backdrop-filter: blur(10px);
 }
 .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-image {
+  display: block;
+  width: auto;
+  height: 72px;
+}
+nav.site-nav.scrolled .nav-logo-image {
+  height: 60px;
+}
 .nav-wordmark {
   display: block;
   font-family: 'Bayer TypeArchiType', serif;
@@ -1009,12 +1017,26 @@ footer {
   .service-item:nth-child(even) { padding-left: 0; }
   .hero-content { padding: 120px 30px 0; }
   .hero-scroll { right: 30px; }
-  .nav-wordmark { font-size: 3.4rem; }
+  .nav-logo-image { height: 58px; }
+  nav.site-nav.scrolled .nav-logo-image { height: 50px; }
 }
 
 @media (max-width: 767px) {
+  #about {
+    padding: 40px 30px 80px;
+    gap: 20px;
+  }
+  #about .section-title {
+    font-size: clamp(64px, 8vw, 96px);
+  }
+  #portfolio .section-title {
+    font-size: clamp(64px, 8vw, 96px);
+  }
+  #portfolio .btn-secondary {
+    display: none;
+  }
   .about-visual {
-    height: clamp(320px, 88vw, 520px);
+    height: clamp(280px, 78vw, 420px);
   }
   .about-img-main {
     width: 74%;
@@ -1164,8 +1186,6 @@ footer {
   .hero-scroll {
     display: none;
   }
-  .nav-wordmark {
-    font-size: 2.6rem;
-    line-height: 0.84;
-  }
+  .nav-logo-image { height: 46px; }
+  nav.site-nav.scrolled .nav-logo-image { height: 42px; }
 }
