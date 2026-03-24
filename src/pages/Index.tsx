@@ -444,11 +444,11 @@ const Index = () => {
           <div className="reveal">
             <div className="contact-info-label">Office</div>
             <div className="contact-info-value">
-              1100 Crescent Green, Suite 200<br />
+              105 Kilmayne Dr, Suite C<br />
               Cary, North Carolina 27518
             </div>
             <div className="contact-info-label">Phone</div>
-            <div className="contact-info-value">(919) 555-0180</div>
+            <div className="contact-info-value">(919) 455-7455</div>
             <div className="contact-info-label">Email</div>
             <div className="contact-info-value" style={{ background: "var(--grad-text)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               hello@radiusdevgroup.com
